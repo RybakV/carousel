@@ -1,8 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body {
     background-color: #ddd;
+    font-family: Arial, sans-serif;
 }
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 16px;
+}
+#carousel-wrap {
+    overflow: hidden;
+    position: relative;
+    height: 400px;
+}
+#carousel {
+    display: flex;
+    position: absolute;
+    height: inherit;
+    left: 0;
+    top: 0;
+    transition:.2s;
+}
+#carousel .item {
+    position: relative;
+    width: 100%;
+    height: inherit;
+    background-size: cover;
+    background-position: center;
+}
+.item-copy {
+    color: #fff;
+    font-weight: bold;
+    padding: 16px 40px;
+    position: absolute;
+    width: auto;
+    overflow: hidden;
+    bottom: 0;
+    background-color: #0007;
+}
+@media(max-width: 800px){
+    .item-copy {
+        padding: 16px 24px;
+
+    }
+}
+.description {
+    font-size: 24px;
+}
+@media(max-width: 800px){
+    .description {
+        font-size: 16px;
+    }
+}
+.username {
+    font-size: 16px;
+}
+@media(max-width: 800px){
+    .username {
+        font-size: 14px;
+    }
+}
+.nav-arrow {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: 80px;
+    height: 80px;
+}
+@media(max-width: 800px){
+    .nav-arrow  {
+        width: 50px;
+        height: 50px;
+    }
+}
+.nav-prev {
+    left: 28px;
+    transform: translateY(-50%);
+}
+.nav-next {
+    right: 28px;
+    transform: scaleX(-1) translateY(-50%);
+}
+.nav-arrow::before, .nav-arrow::after {
+    content: '';
+    display: block;
+    background: #fff;
+    position: absolute;
+    transition: .2s;
+    border-radius: 10px;
+}
+.nav-arrow::before {
+    width: 8%;
+    height: 60%;
+    top: 40%;
+    left: 40%;
+}
+.nav-arrow::after {
+    width: 60%;
+    height: 8%;
+    bottom: 65%;
+    left: 14%;
+}
+.nav-arrow::before, .nav-arrow::after {
+    transform: translateX(5px) rotate(135deg);
+}
+.nav-arrow:hover::before, .nav-arrow:hover::after {
+    transform: translateX(0) rotate(135deg);
 }
