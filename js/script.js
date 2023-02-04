@@ -27,10 +27,17 @@ function renderSlides(json){
     })
 }
 
-navPrev.addEventListener('click',scrollSlider);
-navNext.addEventListener('click',scrollSlider);
+navPrev.addEventListener('click',scrollSliderPrev);
+navNext.addEventListener('click',scrollSliderNext);
 
-function scrollSlider(){
+function scrollSliderPrev() {
+    scrollSlider('prev');
+}
+function scrollSliderNext() {
+    scrollSlider('next');
+}
+
+function scrollSlider(direction){
     function removeForbiddenCharacters(input) {
         const forbiddenChars = ['%','px',]
         for (let char of forbiddenChars) {
@@ -40,7 +47,7 @@ function scrollSlider(){
     }
     let positionLeft = removeForbiddenCharacters(carousel.style.left);
     let newPositionLeft = 0;
-    if (this.classList.contains('nav-prev')){
+    if (direction === 'prev'){
         if (positionLeft >= 0){
             newPositionLeft = (itemsCount-1) * (-100) + '%';
         }
@@ -48,7 +55,7 @@ function scrollSlider(){
             newPositionLeft = (Number(positionLeft) + 100)+'%';
         }
     }
-    else if (this.classList.contains('nav-next')){
+    else if (direction === 'next'){
         if (positionLeft <= (itemsCount-1) * (-100)){
         }
         else {
@@ -57,3 +64,21 @@ function scrollSlider(){
     }
     carousel.style.left = newPositionLeft;
 }
+
+
+let touchstartX = 0;
+let touchendX = 0;
+function checkDirection() {
+    let difX = touchstartX - touchendX;
+    if (Math.abs(difX) > 10) {
+        if (touchendX < touchstartX) {scrollSliderNext();}
+        if (touchendX > touchstartX) {scrollSliderPrev();}
+    }
+}
+carousel.addEventListener('touchstart', e => {
+    touchstartX = e.changedTouches[0].screenX;
+});
+carousel.addEventListener('touchend', e => {
+    touchendX = e.changedTouches[0].screenX;
+    checkDirection();
+});
