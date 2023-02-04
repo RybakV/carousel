@@ -65,7 +65,6 @@ function scrollSlider(direction){
     carousel.style.left = newPositionLeft;
 }
 
-
 let touchstartX = 0;
 let touchendX = 0;
 function checkDirection() {
