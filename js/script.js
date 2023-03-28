@@ -5,7 +5,7 @@ const carousel = document.querySelector("#carousel");
 const navPrev = document.querySelector(".nav-prev");
 const navNext = document.querySelector(".nav-next");
 let carouselContent = '';
-
+//https://api.unsplash.com/collections/CpdiISY2JKQ/photos?client_id=2tYsoxOURyXc9UcVQb7n3R8O12OXTKJTzDo_IoYyRNI&per_page=6
 fetch(`https://api.unsplash.com/collections/${collectionId}/photos?client_id=${apiKey}&per_page=${itemsCount}`)
     .then(response => response.json())
     .then(json => renderSlides(json));
